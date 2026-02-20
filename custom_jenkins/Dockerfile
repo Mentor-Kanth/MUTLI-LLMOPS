@@ -23,5 +23,5 @@ RUN groupadd -f docker && \
 RUN mkdir -p /var/lib/docker
 VOLUME /var/lib/docker
 
-# Switch back to the Jenkins user
-USER jenkins
+# Switch back to the Jenkins user (Changed to root to allow docker socket access)
+USER root
