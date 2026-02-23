@@ -19,9 +19,12 @@ RUN apt-get update -y && \
 RUN groupadd -f docker && \
     usermod -aG docker jenkins
 
+# Ensure the Docker socket is accessible when mounted from the host
+RUN chmod 666 /var/run/docker.sock 2>/dev/null || true
+
 # Create the Docker directory and volume for DinD
 RUN mkdir -p /var/lib/docker
 VOLUME /var/lib/docker
 
-# Switch back to the Jenkins user (Changed to root to allow docker socket access)
-USER root
+# Switch back to the Jenkins user
+USER jenkins
